@@ -10,7 +10,13 @@ import UIKit
 
 let kImageViewHeightDelta: CGFloat = 55.0
 
+protocol CollectionViewCellDelegate: class {
+    func collectionViewCell(collectionViewCellDidLayoutSubViews collectionViewCell: CollectionViewCell)
+}
+
 class CollectionViewCell: UICollectionViewCell {
+    
+    weak var delegate: CollectionViewCellDelegate?
     
     let containerView = UIView(frame: CGRectZero)
     let imageView = UIImageView(frame: CGRectZero)
@@ -60,6 +66,8 @@ class CollectionViewCell: UICollectionViewCell {
         if imageView.frame.size.height != containerView.frame.size.height + kImageViewHeightDelta {
             layoutImageView()
         }
+        
+        delegate?.collectionViewCell(collectionViewCellDidLayoutSubViews: self)
     }
 
 }

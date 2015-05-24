@@ -10,13 +10,14 @@ import UIKit
 
 private let kCollectionViewCellIdentifier = "CollectionViewCell"
 
-class DataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+class DataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, CollectionViewCellDelegate {
     
     let collectionView: UICollectionView
 
     init(collectionView aCollectionView: UICollectionView) {
         collectionView = aCollectionView
         super.init()
+        
     }
     
     func registerReusableViews(collectionView: UICollectionView) {
@@ -28,6 +29,7 @@ class DataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCollectionViewCellIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+        cell.delegate = self
         if indexPath.row == 0 {
             cell.imageView.image = UIImage(named: "db71878985fcc62387131f14f42fc523")
         } else if indexPath.row == 1 {
@@ -68,7 +70,7 @@ class DataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSizeMake(collectionView.frame.size.width, 200.0)
     }
-
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         updateCollectionViewParallax()
     }
@@ -84,6 +86,12 @@ class DataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate
                 (cell as! CollectionViewCell).imageViewNormalizedYOffset = normalizedOffset
             }
         }
+    }
+    
+    //MARK:- CollectionViewCellDelegate
+    
+    func collectionViewCell(collectionViewCellDidLayoutSubViews collectionViewCell: CollectionViewCell) {
+        updateCollectionViewParallax()
     }
 
 }
