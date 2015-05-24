@@ -29,13 +29,17 @@ class ViewController: UIViewController {
             self.collectionView.alwaysBounceVertical = true
             self.collectionView.dataSource = self.dataSource
             self.collectionView.delegate = self.dataSource
-            
+            self.collectionView.frame = self.view.frame
+
             return self.collectionView
             }())
         
         self.dataSource.registerReusableViews(self.collectionView)
         
-        self.collectionView.frame = view.frame
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 }
 

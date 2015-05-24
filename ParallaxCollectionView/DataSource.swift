@@ -29,23 +29,25 @@ class DataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCollectionViewCellIdentifier, forIndexPath: indexPath) as! CollectionViewCell
         if indexPath.row == 0 {
-            cell.imageView.image = UIImage(named: "IMG_0267")
+            cell.imageView.image = UIImage(named: "db71878985fcc62387131f14f42fc523")
         } else if indexPath.row == 1 {
-            cell.imageView.image = UIImage(named: "0ed1c6aa708d120765e6f0af9414f0b0")
+            cell.imageView.image = UIImage(named: "9ee570c890b4986d07884eaec25c2820")
         } else if indexPath.row == 2 {
             cell.imageView.image = UIImage(named: "6a6516de1035a4403c81b7092ebf6418")
         } else if indexPath.row == 3 {
             cell.imageView.image = UIImage(named: "7a71ecaac33617f0e2b9923909eb9d37")
         } else if indexPath.row == 4 {
-            cell.imageView.image = UIImage(named: "9ee570c890b4986d07884eaec25c2820")
+            cell.imageView.image = UIImage(named: "ac60ef293b1778d71fa8673cac6a995a")
+
         } else if indexPath.row == 5 {
             cell.imageView.image = UIImage(named: "46c927e5f5b62498854a6eb472db36fa")
         } else if indexPath.row == 6 {
-            cell.imageView.image = UIImage(named: "ac60ef293b1778d71fa8673cac6a995a")
+            cell.imageView.image = UIImage(named: "KateUptonfeatured")
         } else if indexPath.row == 7 {
             cell.imageView.image = UIImage(named: "d19f4593e7bc4b0b9c6e9312cbcb9fb4")
         } else if indexPath.row == 8 {
-            cell.imageView.image = UIImage(named: "db71878985fcc62387131f14f42fc523")
+            cell.imageView.image = UIImage(named: "IMG_0267")
+
         }
         
         return cell
