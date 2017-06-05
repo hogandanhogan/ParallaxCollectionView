@@ -18,8 +18,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     weak var delegate: CollectionViewCellDelegate?
     
-    let containerView = UIView(frame: CGRectZero)
-    let imageView = UIImageView(frame: CGRectZero)
+    let containerView = UIView(frame: CGRect.zero)
+    let imageView = UIImageView(frame: CGRect.zero)
     
     var imageViewNormalizedYOffset: CGFloat = 0.5 {
         didSet {
@@ -34,7 +34,7 @@ class CollectionViewCell: UICollectionViewCell {
             self.containerView.frame = self.contentView.frame
             self.containerView.clipsToBounds = true
             self.containerView.addSubview({
-                self.imageView.contentMode = .ScaleAspectFill
+                self.imageView.contentMode = .scaleAspectFill
                 self.imageView.clipsToBounds = true
                 self.imageView.frame = self.containerView.frame
 
@@ -52,11 +52,11 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func layoutImageView() {
-        imageView.frame = CGRectMake(
-            0.0,
-            -imageViewNormalizedYOffset * kImageViewHeightDelta,
-            containerView.frame.width,
-            containerView.frame.size.height + kImageViewHeightDelta
+        imageView.frame = CGRect(
+            x: 0.0,
+            y: -imageViewNormalizedYOffset * kImageViewHeightDelta,
+            width: containerView.frame.width,
+            height: containerView.frame.size.height + kImageViewHeightDelta
         )
     }
 

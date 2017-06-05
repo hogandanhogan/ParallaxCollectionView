@@ -20,15 +20,15 @@ class DataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate
         
     }
     
-    func registerReusableViews(collectionView: UICollectionView) {
-        collectionView.registerClass(CollectionViewCell.self, forCellWithReuseIdentifier: kCollectionViewCellIdentifier)
+    func registerReusableViews(_ collectionView: UICollectionView) {
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: kCollectionViewCellIdentifier)
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
     }
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCollectionViewCellIdentifier, forIndexPath: indexPath) as! CollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCollectionViewCellIdentifier, for: indexPath) as! CollectionViewCell
         cell.delegate = self
         if indexPath.row == 0 {
             cell.imageView.image = UIImage(named: "db71878985fcc62387131f14f42fc523")
@@ -55,33 +55,32 @@ class DataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate
         return cell
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(collectionView.frame.size.width, 200.0)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 200.0)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateCollectionViewParallax()
     }
     
     func updateCollectionViewParallax() {
-        let visibleCells = collectionView.visibleCells() as! [UIView]
-        for cell in visibleCells {
-            if cell.isKindOfClass(CollectionViewCell.self) {
-                let normalizedOffset = collectionView.superview!.convertPoint(
-                    CGPointMake(0.0, cell.frame.size.height),
-                    fromView:cell
+        for cell in collectionView.visibleCells {
+            if cell is CollectionViewCell {
+                let normalizedOffset = collectionView.superview!.convert(
+                    CGPoint(x: 0.0, y: cell.frame.size.height),
+                    from:cell
                     ).y/(collectionView.superview!.frame.size.height + cell.frame.size.height)
                 (cell as! CollectionViewCell).imageViewNormalizedYOffset = normalizedOffset
             }

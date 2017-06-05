@@ -10,13 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: {
+    let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: {
         var flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
+        flowLayout.scrollDirection = UICollectionViewScrollDirection.vertical
         return flowLayout
         }())
 
-    private(set) lazy var dataSource: DataSource = {
+    fileprivate(set) lazy var dataSource: DataSource = {
         let dataSource = DataSource(collectionView: self.collectionView)
         return dataSource
         }()
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }
